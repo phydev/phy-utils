@@ -10,7 +10,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='phy_utils',
-    version='0.0.1',
+    version='0.0.2',
     url='https://github.com/phydev/phy_utils.git',
     author='Mauricio Moreira',
     author_email='phydev@protonmail.com',
