@@ -1,6 +1,6 @@
 import pandas as pd
 import seaborn.objects as so
-from typing import Type
+from typing import Type, Any
 
 def repeated_measurement_plot(*args,
                               data: Type[pd.DataFrame], 
