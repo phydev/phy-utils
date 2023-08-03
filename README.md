@@ -5,7 +5,7 @@ Personal library of codes developed for data analysis.
 
 You can install direct from this directory with `pip`
 
-```pip install git+https://github.com/phydev/phy-utils.git@main```
+```pip install git+https://github.com/phydev/phy_utils.git@main```
 
 
 # Functions
