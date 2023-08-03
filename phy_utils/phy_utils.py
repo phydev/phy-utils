@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import seaborn.objects as so
 from typing import Type, Any
