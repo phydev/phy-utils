@@ -102,3 +102,77 @@ def train_test_split_tensors(X, y, **options):
     del(train_test_split)
 
     return X_train, X_test, y_train, y_test
+
+
+def intersect(strings: tuple) -> str:
+    """
+    compare two strings in a tuple and returns the
+    largest intersection between the two.
+    :param strings: tuple with two strings
+    :return str:
+    """
+
+    sets = ([], [])
+
+    for string_set, string in enumerate(strings):
+        for i in range(len(string)):
+            for j in range(i, len(string)):
+                sets[string_set].append(string[i:j+1])
+    
+    return max(set(sets[0]) & set(sets[1]), key = len)
+
+def intersect(strings: tuple[str, str]) -> str:
+    """
+    compare two strings in a tuple and returns the
+    largest intersection between the two.
+    :param strings: tuple with two strings
+    :return str:
+    """
+
+    sets = ([], [])
+
+    for string_set, string in enumerate(strings):
+        for i in range(len(string)):
+            for j in range(i, len(string)):
+                sets[string_set].append(string[i:j+1])
+    
+    return max(set(sets[0]) & set(sets[1]), key = len)
+
+
+def long_format(data: Type[pd.DataFrame], 
+                variables: list[str],
+                time_points: list[Any]) -> Type[pd.DataFrame]:
+    """
+    transform a wide tidy dataframe into a long tidy dataframe
+    pandas.wide_to_long can be used for this purpose, but it is not
+    flexible enough to handle the case where variable names don't end
+    with the time point. This function is more flexible and can be used
+    for any case where the variable names are not in the format:
+    variable_time_point_1, variable_time_point_2, ..., variable_time_point_N
+
+    :param data: wide tidy dataframe
+    :param variables: list of strings with the column names
+    :param time_points: list of time points
+    :return: long tidy dataframe
+
+    """
+    
+    # extract the suffix that identifies the variable
+    column_name = intersect(variables[:2])
+
+    # repeat each observation by len(variables)
+    long_data = data.loc[data.index.repeat(len(variables))].reset_index()
+
+    id = 0
+    while id  < len(data):
+
+        for entry, variable in enumerate(variables):
+            
+            long_data.loc[id+entry, column_name] = data.loc[id, variable]
+            long_data.loc[id+entry, "time"] = time_points[entry]
+
+        id += 4
+
+    long_data = long_data.drop(columns = time_variables)
+
+    return long_data
