@@ -104,23 +104,6 @@ def train_test_split_tensors(X, y, **options):
     return X_train, X_test, y_train, y_test
 
 
-def intersect(strings: tuple) -> str:
-    """
-    compare two strings in a tuple and returns the
-    largest intersection between the two.
-    :param strings: tuple with two strings
-    :return str:
-    """
-
-    sets = ([], [])
-
-    for string_set, string in enumerate(strings):
-        for i in range(len(string)):
-            for j in range(i, len(string)):
-                sets[string_set].append(string[i:j+1])
-    
-    return max(set(sets[0]) & set(sets[1]), key = len)
-
 def intersect(strings: tuple[str, str]) -> str:
     """
     compare two strings in a tuple and returns the
