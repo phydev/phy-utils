@@ -156,6 +156,6 @@ def long_format(data: Type[pd.DataFrame],
 
         id += 4
 
-    long_data = long_data.drop(columns = time_variables)
+    long_data = long_data.drop(columns = variables)
 
     return long_data
