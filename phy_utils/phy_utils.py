@@ -159,3 +159,16 @@ def long_format(data: Type[pd.DataFrame],
     long_data = long_data.drop(columns = variables)
 
     return long_data
+
+def confidence_interval(measurements: Type[np.ndarray]) -> tuple[float, float]:
+    """
+    compute 95% confidence intervals for conditinuous and unbounded variables
+    assuming a gaussian distribution
+    :param measurements: array with measurements
+    :return tuple:  
+    """
+    mean = np.mean(measurements) 
+    lower_ci = mean - 1.96 * np.std(measurements)/np.sqrt(len(measurements))
+    upper_ci = mean + 1.96 * np.std(measurements)/np.sqrt(len(measurements))
+
+    return lower_ci, upper_ci
